@@ -1,15 +1,6 @@
-import UIKit
-/*
- struc Flavor - name and rating
- struct Cone - flavor and toppings
- class IceCreamShop - holds flavors, sizes and toppings
- func to list flavors - recommend 4 rating
- func orderCone
- */
-
 enum Size: Double {
     case small = 3.99
-    case medium = 4.20
+    case medium = 4.25
     case large = 4.99
 }
 
@@ -52,6 +43,7 @@ class IceCreamShop {
         self.totalSales = totalSales
     }
     
+    //top flavors with Stretch goal
     func listTopFlavors() -> String {
         var topFlavors = [String]()
         
@@ -60,11 +52,21 @@ class IceCreamShop {
                 topFlavors.append(flavor.name)
             }
         }
-        return "Our top flavors are \(topFlavors)"
+        if topFlavors.isEmpty {
+            return " Sorry We are out of our top flavors."
+        } else {
+            return "Our top flavors are \(topFlavors[0]) and \(topFlavors[1]) "
+
+        }
     }
     
+    
+    //Order Cone
+    
     func orderCone(flavor: Flavor , toppings: [Topping], size: Size ) -> Cone? {
-        var cone = Cone(flavor: flavor, toppings: toppings, size: size)
+        var available: Bool
+        let cone = Cone(flavor: flavor, toppings: toppings, size: size)
+        
         totalSales += cone.size.rawValue
         print("Your \(size) \(cone.flavor.name) cone will cost $\(size.rawValue)")
          return cone
@@ -72,9 +74,9 @@ class IceCreamShop {
 }
 
 /// FLAVORS
-let chocolate = Flavor(name: "Chocolate", rating: 4.0)
+let chocolate = Flavor(name: "Chocolate", rating: 1.0)
 let vanilla = Flavor(name: "Vanilla", rating: 3.0)
-let strawberry = Flavor(name: "Strawberry", rating: 4.0)
+let strawberry = Flavor(name: "Strawberry", rating: 1.0)
 let rockyRoad = Flavor(name: "Rocky Road", rating: 3.5)
 let cookieDough = Flavor(name: "Cookie Dough", rating: 3.0)
 let broccoli = Flavor(name: "Broccoli", rating: 2.0)
@@ -86,14 +88,19 @@ let shop = IceCreamShop(flavors: [chocolate, vanilla, strawberry, rockyRoad, coo
     , totalSales: 0.00)
 
 // Print top flavors //
+
 print(shop.listTopFlavors())
 
 
 // order cone tests //
 let newCone = shop.orderCone(flavor: vanilla, toppings: [.carmel, .nuts], size: .small)
-print(newCone?.eat())
+print("NEW CONE", newCone?.eat())
 
 shop.orderCone(flavor: strawberry, toppings: [.carmel, .nuts], size: .small)
 shop.orderCone(flavor: rockyRoad, toppings: [.carmel, .nuts], size: .medium)
 shop.orderCone(flavor: chocolate, toppings: [.carmel, .nuts], size: .large)
-print("The shop's total sales from today are \(shop.totalSales).")
+print("The shop's total sales from today are $\(shop.totalSales).")
+
+
+
+
