@@ -30,7 +30,7 @@ struct Flavor {
 
 struct Cone {
     let flavor: Flavor
-    let toppings: Topping
+    let toppings: [Topping]
     let size: Size
     
     func eat(){
@@ -52,12 +52,21 @@ class IceCreamShop {
         self.totalSales = totalSales
     }
     
-    func listTopFlavors() {
+    func listTopFlavors() -> String {
+        var topFlavors = [Flavor]()
         for flavor in flavors {
             if flavor.rating >= 4.0 {
-                print(flavor)
+                topFlavors.append(flavor)
             }
         }
+        return "Our top flavors are \(topFlavors)"
+    }
+    
+    func orderCone(flavor: Flavor , toppings: [Topping], size: Size ) -> Cone? {
+        var cone = Cone(flavor: flavor, toppings: toppings, size: size)
+        totalSales += cone.size.rawValue
+        print("Your \(size) \(cone.flavor.name) cone will cost $\(size.rawValue)")
+         return cone
     }
 }
 
@@ -75,4 +84,13 @@ let shop = IceCreamShop(flavors: [chocolate, vanilla, strawberry, rockyRoad, coo
     .carmel, .chocolate, .nuts, .sprinkels]
     , totalSales: 0.00)
 
-print(shop.toppings)
+// Print top flavors //  
+shop.listTopFlavors()
+
+
+// order cone tests //
+shop.orderCone(flavor: vanilla, toppings: [.carmel, .nuts], size: .small)
+shop.orderCone(flavor: strawberry, toppings: [.carmel, .nuts], size: .small)
+shop.orderCone(flavor: rockyRoad, toppings: [.carmel, .nuts], size: .medium)
+shop.orderCone(flavor: chocolate, toppings: [.carmel, .nuts], size: .large)
+print(shop.totalSales)
