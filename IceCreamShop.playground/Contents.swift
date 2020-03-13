@@ -53,10 +53,11 @@ class IceCreamShop {
     }
     
     func listTopFlavors() -> String {
-        var topFlavors = [Flavor]()
+        var topFlavors = [String]()
+        
         for flavor in flavors {
             if flavor.rating >= 4.0 {
-                topFlavors.append(flavor)
+                topFlavors.append(flavor.name)
             }
         }
         return "Our top flavors are \(topFlavors)"
@@ -85,7 +86,7 @@ let shop = IceCreamShop(flavors: [chocolate, vanilla, strawberry, rockyRoad, coo
     , totalSales: 0.00)
 
 // Print top flavors //
-shop.listTopFlavors()
+print(shop.listTopFlavors())
 
 
 // order cone tests //
