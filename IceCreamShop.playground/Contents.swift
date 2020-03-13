@@ -34,7 +34,7 @@ struct Cone {
     let size: Size
     
     func eat(){
-        print("Mmm! I love \(flavor)!!")
+        print("Mmm! I love \(flavor.name)!!")
     }
 }
 
@@ -84,13 +84,15 @@ let shop = IceCreamShop(flavors: [chocolate, vanilla, strawberry, rockyRoad, coo
     .carmel, .chocolate, .nuts, .sprinkels]
     , totalSales: 0.00)
 
-// Print top flavors //  
+// Print top flavors //
 shop.listTopFlavors()
 
 
 // order cone tests //
-shop.orderCone(flavor: vanilla, toppings: [.carmel, .nuts], size: .small)
+let newCone = shop.orderCone(flavor: vanilla, toppings: [.carmel, .nuts], size: .small)
+print(newCone?.eat())
+
 shop.orderCone(flavor: strawberry, toppings: [.carmel, .nuts], size: .small)
 shop.orderCone(flavor: rockyRoad, toppings: [.carmel, .nuts], size: .medium)
 shop.orderCone(flavor: chocolate, toppings: [.carmel, .nuts], size: .large)
-print(shop.totalSales)
+print("The shop's total sales from today are \(shop.totalSales).")
