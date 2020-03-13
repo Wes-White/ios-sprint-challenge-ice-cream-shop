@@ -41,14 +41,14 @@ struct Cone {
 
 class IceCreamShop {
     let flavors: [Flavor]
-    let size: Size
+    let sizes: [Size]
     let toppings: [Topping]
     var totalSales: Double
     
-    init(flavors: Cone, size: Size, toppings: Topping, totalSales: Double) {
-        self.flavors = []
-        self.size = size
-        self.toppings = []
+    init(flavors: [Flavor], sizes: [Size], toppings: [Topping], totalSales: Double) {
+        self.flavors = flavors
+        self.sizes = sizes
+        self.toppings = toppings
         self.totalSales = totalSales
     }
     
@@ -69,3 +69,10 @@ let rockyRoad = Flavor(name: "Rocky Road", rating: 3.5)
 let cookieDough = Flavor(name: "Cookie Dough", rating: 3.0)
 let broccoli = Flavor(name: "Broccoli", rating: 2.0)
 
+
+
+let shop = IceCreamShop(flavors: [chocolate, vanilla, strawberry, rockyRoad, cookieDough, broccoli], sizes: [.small, .medium, .large], toppings: [
+    .carmel, .chocolate, .nuts, .sprinkels]
+    , totalSales: 0.00)
+
+print(shop.toppings)
